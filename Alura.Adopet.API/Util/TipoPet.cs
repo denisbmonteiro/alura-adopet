@@ -1,10 +1,9 @@
-﻿namespace Alura.Adopet.API.Util
+﻿namespace Alura.Adopet.API.Util;
+
+public enum TipoPet
 {
-	internal enum TipoPet
-	{
-		Gato,
-		Cachorro,
-		Reptil,
-		PorcoDaIndia
-	}
+	Gato,
+	Cachorro,
+	Reptil,
+	PorcoDaIndia
 }
