@@ -1,4 +1,6 @@
-namespace Alura.Adopet.Console;
+using Alura.Adopet.Console.Modelos;
+
+namespace Alura.Adopet.Console.Util;
 
 internal class LeitorDeArquivo
 {

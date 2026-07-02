@@ -1,4 +1,4 @@
-﻿namespace Alura.Adopet.Console;
+﻿namespace Alura.Adopet.Console.Comandos;
 
 [DocComando(instrucao: "show", documentacao: "adopet show <ARQUIVO> comando que exibe no terminal o conteúdo do arquivo importado.")]
 internal class Show

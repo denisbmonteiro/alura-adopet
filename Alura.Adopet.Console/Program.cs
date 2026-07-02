@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using Alura.Adopet.Console;
+using Alura.Adopet.Console.Comandos;
+using Alura.Adopet.Console.Modelos;
 
 // na linha abaixo cria-se uma instância de HttpClient para consumir API Adopet.
 HttpClient client = ConfiguraHttpClient("http://localhost:5057");
@@ -51,6 +52,7 @@ HttpClient ConfiguraHttpClient(string url)
     _client.BaseAddress = new Uri(url);
     return _client;
 }
+
 Task<HttpResponseMessage> CreatePetAsync(Pet pet)
 {
     HttpResponseMessage? response = null;
@@ -59,6 +61,7 @@ Task<HttpResponseMessage> CreatePetAsync(Pet pet)
         return client.PostAsJsonAsync("pet/add", pet);
     }
 }
+
 async Task<IEnumerable<Pet>?> ListPetsAsync()
 {
     HttpResponseMessage response = await client.GetAsync("pet/list");
