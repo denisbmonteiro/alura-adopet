@@ -1,40 +1,25 @@
-﻿using System.Net.Http.Headers;
-using System.Net.Http.Json;
+﻿using Alura.Adopet.Console.Modelos;
+using Alura.Adopet.Console.Servicos;
 
 namespace Alura.Adopet.Console.Comandos;
 
 [DocComando(instrucao: "list", documentacao: "adopet list comando que exibe no terminal o conteúdo cadastrado na base de dados da AdoPet.")]
-internal class List
+internal class List : IComando
 {
-    HttpClient client;
-    public List()
+    public Task ExecutarAsync(string[] args)
     {
-        client = ConfiguraHttpClient("http://localhost:5057");
+        return ListaDadosPetsDaAPIAsync();
     }
 
-    public async Task ListaDadosPetsDaAPIAsync()
+    private async Task ListaDadosPetsDaAPIAsync()
     {
-        IEnumerable<Pet>? pets = await ListPetsAsync();
+        var httpListPet = new HttpClientPet();
+        IEnumerable<Pet>? pets = await httpListPet.ListPetsAsync();
         System.Console.WriteLine("----- Lista de Pets importados no sistema -----");
+
         foreach (var pet in pets)
         {
             System.Console.WriteLine(pet);
         }
-    }
-
-    HttpClient ConfiguraHttpClient(string url)
-    {
-        HttpClient _client = new HttpClient();
-        _client.DefaultRequestHeaders.Accept.Clear();
-        _client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-        _client.BaseAddress = new Uri(url);
-        return _client;
-    }
-
-    async Task<IEnumerable<Pet>?> ListPetsAsync()
-    {
-        HttpResponseMessage response = await client.GetAsync("pet/list");
-        return await response.Content.ReadFromJsonAsync<IEnumerable<Pet>>();
     }
 }

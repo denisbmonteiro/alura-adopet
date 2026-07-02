@@ -17,7 +17,7 @@ try
             break;
         case "help":
             var help = new Help();
-            help.ExibeDocumentacao(parametros: args);
+            await help.ExecutarAsync(args);
             break;
         case "show":
             var show = new Show();
@@ -25,7 +25,7 @@ try
             break;
         case "list":
             var list = new List();
-            await list.ListaDadosPetsDaAPIAsync();
+            await list.ExecutarAsync(args);
             break;
         default:
             Console.WriteLine("Comando inválido!");
