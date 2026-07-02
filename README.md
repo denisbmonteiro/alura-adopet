@@ -87,8 +87,14 @@ Com a API em execução, utilize os seguintes comandos no diretório do projeto 
 
 ```bash
 dotnet run import lista.csv
+```
+```bash
 dotnet run list
+```
+```bash
 dotnet run show lista.csv
+```
+```bash
 dotnet run help
 ```
 
