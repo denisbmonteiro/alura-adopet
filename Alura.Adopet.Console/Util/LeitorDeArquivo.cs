@@ -14,13 +14,12 @@ internal class LeitorDeArquivo
 
             while (!sr.EndOfStream)
             {
-                string[]? propriedades = sr.ReadLine()?.Split(';');
+                var linha = sr.ReadLine();
 
-                var pet = new Pet(
-                    Guid.Parse(propriedades[0]),
-                    propriedades[1],
-                    int.Parse(propriedades[2]) == 1 ? TipoPet.Gato : TipoPet.Cachorro
-                );
+                if (string.IsNullOrWhiteSpace(linha))
+                    continue;
+
+                var pet = linha.ConverteDoTexto();
 
                 listaDePet.Add(pet);
             }
