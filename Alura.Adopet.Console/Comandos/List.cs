@@ -1,5 +1,4 @@
-﻿using Alura.Adopet.Console.Modelos;
-using Alura.Adopet.Console.Servicos;
+﻿using Alura.Adopet.Console.Servicos;
 
 namespace Alura.Adopet.Console.Comandos;
 
@@ -13,9 +12,16 @@ internal class List : IComando
 
     private async Task ListaDadosPetsDaAPIAsync()
     {
-        var httpListPet = new HttpClientPet();
-        IEnumerable<Pet>? pets = await httpListPet.ListPetsAsync();
         System.Console.WriteLine("----- Lista de Pets importados no sistema -----");
+
+        var httpClientPet = new HttpClientPet();
+        var pets = await httpClientPet.ListPetsAsync();
+
+        if (pets is null)
+        {
+            System.Console.WriteLine("Nenhum pet encontrado!");
+            return;
+        }
 
         foreach (var pet in pets)
         {
