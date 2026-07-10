@@ -17,7 +17,7 @@ try
 catch (Exception ex)
 {
     Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine($"Aconteceu um exceção: {ex.Message}");
+    Console.WriteLine($"Aconteceu uma exceção: {ex.Message}");
 }
 finally
 {
