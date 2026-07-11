@@ -2,7 +2,7 @@ using Alura.Adopet.Console.Modelos;
 
 namespace Alura.Adopet.Console.Util;
 
-internal class LeitorDeArquivo
+public class LeitorDeArquivo
 {
     public List<Pet> RealizaLeitura(string caminhoDoArquivoASerLido)
     {
