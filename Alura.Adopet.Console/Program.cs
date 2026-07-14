@@ -1,6 +1,6 @@
 ﻿using Alura.Adopet.Console.Comandos;
 
-ComandosDoSistema comandos = new();
+var comandos = new ComandosDoSistema();
 
 Console.ForegroundColor = ConsoleColor.Green;
 
