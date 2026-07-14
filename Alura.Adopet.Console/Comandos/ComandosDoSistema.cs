@@ -1,14 +1,23 @@
+using Alura.Adopet.Console.Servicos;
+
 namespace Alura.Adopet.Console.Comandos;
 
-internal class ComandosDoSistema
+public class ComandosDoSistema
 {
-    private Dictionary<string, IComando> comandosDoSistema = new()
-    {
-        {"help",new Help() },
-        {"import",new Import() },
-        {"list",new List() },
-        {"show",new Show() }
-    };
+    private HttpClientPet _httpClientPet;
+    private Dictionary<string, IComando> _comandosDoSistema;
 
-    public IComando? this [string key] => comandosDoSistema.ContainsKey(key) ? comandosDoSistema[key] : null;
+    public ComandosDoSistema()
+    {
+        _httpClientPet = new HttpClientPet();
+        _comandosDoSistema = new()
+        {
+            {"help", new Help() },
+            {"import", new Import(_httpClientPet) },
+            {"list", new List(_httpClientPet) },
+            {"show", new Show() }
+        };
+    }
+
+    public IComando? this [string key] => _comandosDoSistema.ContainsKey(key) ? _comandosDoSistema[key] : null;
 }
