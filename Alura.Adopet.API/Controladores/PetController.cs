@@ -16,13 +16,14 @@ public class PetController:ControllerBase
     public async Task<IResult> ListaDePet()
     {
         var _logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .WriteTo.File("AdoPetAPI-Actions-logs.txt", rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+            .WriteTo.Console()
+            //.WriteTo.File("AdoPetAPI-Actions-logs.txt", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
 
         var options = new DbContextOptionsBuilder<DataBaseContext>()
-        .UseInMemoryDatabase("AdopetDB")
-        .Options;
+            .UseInMemoryDatabase("AdopetDB")
+            .Options;
+
         try
         {
             DataBaseContext _context = new(options);
@@ -52,15 +53,15 @@ public class PetController:ControllerBase
         string filename = $@"{path}\{_data}.adopet.log";
 
         Log.Logger = new LoggerConfiguration()
-                        .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
-                        .Enrich.FromLogContext()
-                        .WriteTo.Console()
-                        .WriteTo.File(filename, outputTemplate: template)
-                        .CreateLogger();
+            .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
+            .Enrich.FromLogContext()
+            .WriteTo.Console()
+            //.WriteTo.File(filename, outputTemplate: template)
+            .CreateLogger();
 
         var options = new DbContextOptionsBuilder<DataBaseContext>()
-        .UseInMemoryDatabase("AdopetDB")
-        .Options;
+            .UseInMemoryDatabase("AdopetDB")
+            .Options;
 
         try
         {
