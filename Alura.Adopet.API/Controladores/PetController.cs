@@ -43,9 +43,9 @@ public class PetController:ControllerBase
     public async Task<IResult> CadatrarPet([FromBody]Pet pet)
     {
         IConfigurationRoot configuration = new ConfigurationBuilder()
-        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-        .AddJsonFile("appsettings.json")
-        .Build();
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
 
         string _data = DateTime.Now.ToString("yyyy-MM-dd_HH");
         string? path = configuration["LoggerBasePath"];
