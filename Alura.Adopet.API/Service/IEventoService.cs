@@ -1,7 +1,6 @@
-﻿namespace Alura.Adopet.API.Service
+﻿namespace Alura.Adopet.API.Service;
+
+public interface IEventoService
 {
-    public interface IEventoService
-    {
-        void GenerateFakeDate();
-    }
+    void GenerateFakeDate();
 }
