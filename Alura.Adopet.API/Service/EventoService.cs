@@ -7,6 +7,7 @@ namespace Alura.Adopet.API.Service;
 internal class EventoService : IEventoService
 {
     private DataBaseContext _context;
+
     public EventoService(DataBaseContext context)
     {
         _context = context;
