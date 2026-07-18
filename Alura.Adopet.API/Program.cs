@@ -1,12 +1,10 @@
 using Alura.Adopet.API;
 using Alura.Adopet.API.Dados.Context;
 using Alura.Adopet.API.Service;
-using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);// Criando uma aplicação Web.
+var builder = WebApplication.CreateBuilder(args);// Criando uma aplicaï¿½ï¿½o Web.
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
@@ -17,7 +15,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
 
-builder.Services.AddScoped<IEventoService,EventoService>()               
+builder.Services.AddScoped<IEventoService,EventoService>()
                 .AddDbContext<DataBaseContext>(opt => {
                     opt.UseInMemoryDatabase("AdopetDB");
                     opt.UseLoggerFactory(LoggerFactory.Create(builder =>
@@ -36,13 +34,13 @@ builder.Services.AddSwaggerGen();
 //    {
 //        opt.LoggingFields = HttpLoggingFields.RequestPropertiesAndHeaders|
 //                            HttpLoggingFields.ResponsePropertiesAndHeaders|
-//                            HttpLoggingFields.ResponseBody| 
+//                            HttpLoggingFields.ResponseBody|
 //                            HttpLoggingFields.ResponseBody;
 //    });
 
 //}
 
-//Adicionando serviços.
+//Adicionando serviÃ§os.
 var serviceProvider = builder.Services.BuildServiceProvider();
 var eventoService = serviceProvider.GetService<IEventoService>();
 
@@ -51,7 +49,6 @@ eventoService.GenerateFakeDate();
 
 // Ativando o Swagger
 app.UseSwagger();
-
 
 // Ativando a interface Swagger
 app.UseSwaggerUI(
@@ -63,5 +60,4 @@ app.UseSwaggerUI(
 );
 
 app.MapControllers();
-// Roda a aplicação
 app.Run();
