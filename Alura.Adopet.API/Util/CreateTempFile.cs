@@ -1,17 +1,16 @@
-﻿namespace Alura.Adopet.API.Util
+﻿namespace Alura.Adopet.API.Util;
+
+internal static class CreateTempFile
 {
-    internal static class CreateTempFile
+    public static string CreateTempfilePath()
     {
-        public static string CreateTempfilePath()
-        {
-            var filename = $@"{DateTime.Now.Ticks}.tmp";
+        var filename = $@"{DateTime.Now.Ticks}.tmp";
 
-            var directoryPath = Path.Combine("Files", "Uploads");
+        var directoryPath = Path.Combine("Files", "Uploads");
 
-            if (!Directory.Exists(directoryPath))
-                Directory.CreateDirectory(directoryPath);
+        if (!Directory.Exists(directoryPath))
+            Directory.CreateDirectory(directoryPath);
 
-            return Path.Combine(directoryPath, filename);
-        }
+        return Path.Combine(directoryPath, filename);
     }
 }
