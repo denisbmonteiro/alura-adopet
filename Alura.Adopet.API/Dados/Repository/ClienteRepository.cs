@@ -8,10 +8,12 @@ namespace Alura.Adopet.API.Dados.Repository;
 internal class ClienteRepository : IClienteRepository
 {
     private DataBaseContext _context;
+
     public ClienteRepository(DataBaseContext ctx)
     {
         _context= ctx;
     }
+
     public Cliente Adicionar(Cliente _cliente)
     {
         _context.Add(_cliente);
