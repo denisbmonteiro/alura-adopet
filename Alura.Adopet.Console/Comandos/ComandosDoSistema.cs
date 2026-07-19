@@ -9,7 +9,7 @@ public class ComandosDoSistema
 
     public ComandosDoSistema()
     {
-        _httpClientPet = new HttpClientPet();
+        _httpClientPet = new HttpClientPet(new AdopetApiClientFactory().CreateClient("adopet"));
         _comandosDoSistema = new()
         {
             {"help", new Help() },
