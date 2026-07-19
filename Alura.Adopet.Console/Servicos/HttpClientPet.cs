@@ -1,4 +1,3 @@
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Alura.Adopet.Console.Modelos;
 
@@ -8,18 +7,9 @@ public class HttpClientPet
 {
     private readonly HttpClient _client;
 
-    public HttpClientPet(string uri = "http://localhost:5057")
+    public HttpClientPet(HttpClient client)
     {
-        _client = SetupHttpClient(uri);
-    }
-
-    private static HttpClient SetupHttpClient(string url)
-    {
-        var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Accept.Clear();
-        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        httpClient.BaseAddress = new Uri(url);
-        return httpClient;
+        _client = client;
     }
 
     public Task CreatePetAsync(Pet pet)
