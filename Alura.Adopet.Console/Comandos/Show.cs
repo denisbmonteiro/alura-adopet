@@ -13,8 +13,14 @@ internal class Show : IComando
 
     private void ExibeConteudoArquivo(string caminhoDoArquivoASerExibido)
     {
-        LeitorDeArquivo leitor = new LeitorDeArquivo();
-        var listaDePets = leitor.RealizaLeitura(caminhoDoArquivoASerLido: caminhoDoArquivoASerExibido);
+        var leitor = new LeitorDeArquivo(caminhoDoArquivoASerExibido);
+        var listaDePets = leitor.RealizaLeitura();
+
+        if (listaDePets is null)
+        {
+            System.Console.WriteLine("Nenhum pet encontrado no arquivo!");
+            return;
+        }
 
         foreach (var pet in listaDePets)
         {

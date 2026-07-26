@@ -1,5 +1,4 @@
-﻿using Alura.Adopet.Console.Modelos;
-using Alura.Adopet.Console.Servicos;
+﻿using Alura.Adopet.Console.Servicos;
 using Alura.Adopet.Console.Util;
 
 namespace Alura.Adopet.Console.Comandos;
@@ -21,10 +20,16 @@ internal class Import : IComando
 
     private async Task ImportacaoArquivoPetAsync(string caminhoDoArquivoDeImportacao)
     {
-        var leitor = new LeitorDeArquivo();
-        List<Pet> listaDePet = leitor.RealizaLeitura(caminhoDoArquivoASerLido: caminhoDoArquivoDeImportacao);
+        var leitor = new LeitorDeArquivo(caminhoDoArquivoDeImportacao);
+        var listaDePets = leitor.RealizaLeitura();
 
-        foreach (var pet in listaDePet)
+        if (listaDePets is null)
+        {
+            System.Console.WriteLine("Nenhum pet encontrado no arquivo!");
+            return;
+        }
+
+        foreach (var pet in listaDePets)
         {
             System.Console.WriteLine(pet);
 
