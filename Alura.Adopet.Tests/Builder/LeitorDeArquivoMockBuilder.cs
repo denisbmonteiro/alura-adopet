@@ -6,7 +6,7 @@ namespace Alura.Adopet.Tests.Builder;
 
 public static class LeitorDeArquivoMockBuilder
 {
-    public static Mock<LeitorDeArquivo> CriaMock(List<Pet> listaDePet)
+    public static Mock<LeitorDeArquivo> GetMock(List<Pet> listaDePet)
     {
         var leitorDeArquivo = new Mock<LeitorDeArquivo>(MockBehavior.Default, It.IsAny<string>());
 
