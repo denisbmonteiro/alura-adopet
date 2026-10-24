@@ -1,19 +1,22 @@
 using Alura.Adopet.Console.Servicos;
+using Alura.Adopet.Console.Util;
 
 namespace Alura.Adopet.Console.Comandos;
 
 public class ComandosDoSistema
 {
-    private HttpClientPet _httpClientPet;
-    private Dictionary<string, IComando> _comandosDoSistema;
+    private readonly HttpClientPet _httpClientPet;
+    private readonly LeitorDeArquivo _leitorDeArquivo;
+    private readonly Dictionary<string, IComando> _comandosDoSistema;
 
-    public ComandosDoSistema()
+    public ComandosDoSistema(string caminhoDoArquivo)
     {
         _httpClientPet = new HttpClientPet(new AdopetApiClientFactory().CreateClient("adopet"));
+        _leitorDeArquivo = new LeitorDeArquivo(caminhoDoArquivo);
         _comandosDoSistema = new()
         {
             {"help", new Help() },
-            {"import", new Import(_httpClientPet) },
+            {"import", new Import(_httpClientPet, _leitorDeArquivo) },
             {"list", new List(_httpClientPet) },
             {"show", new Show() }
         };

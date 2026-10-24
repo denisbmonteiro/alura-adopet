@@ -7,21 +7,22 @@ namespace Alura.Adopet.Console.Comandos;
 public class Import : IComando
 {
     private readonly HttpClientPet _httpClientPet;
+    private readonly LeitorDeArquivo _leitorDeArquivo;
 
-    public Import(HttpClientPet httpClientPet)
+    public Import(HttpClientPet httpClientPet, LeitorDeArquivo leitorDeArquivo)
     {
         _httpClientPet = httpClientPet;
+        _leitorDeArquivo = leitorDeArquivo;
     }
 
     public async Task ExecutarAsync(string[] args)
     {
-        await ImportacaoArquivoPetAsync(caminhoDoArquivoDeImportacao: args[1]);
+        await ImportacaoArquivoPetAsync();
     }
 
-    private async Task ImportacaoArquivoPetAsync(string caminhoDoArquivoDeImportacao)
+    private async Task ImportacaoArquivoPetAsync()
     {
-        var leitor = new LeitorDeArquivo(caminhoDoArquivoDeImportacao);
-        var listaDePets = leitor.RealizaLeitura();
+        var listaDePets = _leitorDeArquivo.RealizaLeitura();
 
         if (listaDePets is null)
         {
