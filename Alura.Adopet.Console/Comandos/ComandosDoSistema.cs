@@ -18,7 +18,7 @@ public class ComandosDoSistema
             {"help", new Help() },
             {"import", new Import(_httpClientPet, _leitorDeArquivo) },
             {"list", new List(_httpClientPet) },
-            {"show", new Show() }
+            {"show", new Show(_leitorDeArquivo) }
         };
     }
 
