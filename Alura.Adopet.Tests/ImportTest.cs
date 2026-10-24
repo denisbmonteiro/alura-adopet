@@ -1,7 +1,7 @@
 using Alura.Adopet.Console.Comandos;
 using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Servicos;
-using Alura.Adopet.Console.Util;
+using Alura.Adopet.Tests.Builder;
 using Moq;
 
 namespace Alura.Adopet.Tests;
@@ -12,10 +12,8 @@ public class ImportTest
     public async Task QuandoListaVaziaNaoDeveChamarCreatePetAsync()
     {
         //Arrange
-        var leitorDeArquivo = new Mock<LeitorDeArquivo>(MockBehavior.Default, It.IsAny<string>());
         var listaDePet = new List<Pet>();
-
-        leitorDeArquivo.Setup(_ => _.RealizaLeitura()).Returns(listaDePet);
+        var leitorDeArquivo = LeitorDeArquivoMockBuilder.CriaMock(listaDePet);
 
         var httpClientPet = new Mock<HttpClientPet>(MockBehavior.Default, It.IsAny<HttpClient>());
         var import = new Import(httpClientPet.Object, leitorDeArquivo.Object);
