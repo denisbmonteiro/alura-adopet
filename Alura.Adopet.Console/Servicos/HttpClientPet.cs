@@ -12,7 +12,7 @@ public class HttpClientPet
         _client = client;
     }
 
-    public Task CreatePetAsync(Pet pet)
+    public virtual Task CreatePetAsync(Pet pet)
     {
         return _client.PostAsJsonAsync("pet/add", pet);
     }
