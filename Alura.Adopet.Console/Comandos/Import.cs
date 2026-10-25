@@ -23,29 +23,28 @@ public class Import : IComando
 
     private async Task<Result> ImportacaoArquivoPetAsync()
     {
-        var listaDePets = _leitorDeArquivo.RealizaLeitura();
-
-        if (listaDePets is null)
+        try
         {
-            System.Console.WriteLine("Nenhum pet encontrado no arquivo!");
-            return Result.Fail("Nenhum pet encontrado no arquivo!");
-        }
+            var listaDePets = _leitorDeArquivo.RealizaLeitura();
 
-        foreach (var pet in listaDePets)
-        {
-            System.Console.WriteLine(pet);
-
-            try
+            if (listaDePets is null)
             {
+                System.Console.WriteLine("Nenhum pet encontrado no arquivo!");
+                return Result.Fail("Nenhum pet encontrado no arquivo!");
+            }
+
+            foreach (var pet in listaDePets)
+            {
+                System.Console.WriteLine(pet);
                 await _httpClientPet.CreatePetAsync(pet);
             }
-            catch (Exception ex)
-            {
-                System.Console.WriteLine(ex.Message);
-            }
-        }
 
-        System.Console.WriteLine("Importação concluída!");
-        return Result.Ok().WithSuccess(new SuccessWithPets(listaDePets));
+            System.Console.WriteLine("Importação concluída!");
+            return Result.Ok().WithSuccess(new SuccessWithPets(listaDePets));
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail(new Error("Importação falhou!").CausedBy(ex));
+        }
     }
 }

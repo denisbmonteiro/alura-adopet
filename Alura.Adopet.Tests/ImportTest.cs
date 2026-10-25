@@ -28,7 +28,7 @@ public class ImportTest
     }
 
     [Fact]
-    public async Task QuandoArquivoNaoExistenteDeveGerarException()
+    public async Task QuandoArquivoNaoExistenteDeveGerarFalha()
     {
         //Arrange
         var listaDePet = new List<Pet>();
@@ -39,8 +39,11 @@ public class ImportTest
         var import = new Import(httpClientPet.Object, leitorDeArquivo.Object);
         string[] args = { "import", "lista.csv" };
 
-        //Act+Assert
-        await Assert.ThrowsAnyAsync<Exception>(() => import.ExecutarAsync(args));
+        //Act
+        var resultado = await import.ExecutarAsync(args);
+
+        //Assert
+        Assert.True(resultado.IsFailed);
     }
 
     [Fact]
