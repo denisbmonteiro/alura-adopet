@@ -18,8 +18,7 @@ internal class Help : IComando
     {
         try
         {
-            ExibeDocumentacao(args);
-            return Task.FromResult(Result.Ok());
+            return Task.FromResult(Result.Ok().WithSuccess(new SuccessWithDocs(GerarDocumentacao(args))));
         }
         catch (Exception ex)
         {
@@ -27,17 +26,15 @@ internal class Help : IComando
         }
     }
 
-    private void ExibeDocumentacao(string[] parametros)
+    private IEnumerable<string> GerarDocumentacao(string[] parametros)
     {
+        var resultado = new List<string>();
+
         if (parametros.Length == 1)
         {
-            System.Console.WriteLine($"Adopet (1.0) - Aplicativo de linha de comando (CLI).");
-            System.Console.WriteLine($"Realiza a importação em lote de um arquivos de pets.");
-            System.Console.WriteLine($"Comando possíveis: ");
-
             foreach (var doc in docs.Values)
             {
-                System.Console.WriteLine(doc.Documentacao);
+                resultado.Add(doc.Documentacao);
             }
         }
         else if (parametros.Length == 2)
@@ -46,8 +43,14 @@ internal class Help : IComando
             if (docs.ContainsKey(comandoASerExibido))
             {
                 var comando = docs[comandoASerExibido];
-                System.Console.WriteLine(comando.Documentacao);
+                resultado.Add(comando.Documentacao);
+            }
+            else
+            {
+                resultado.Add("Comando não encontrado!");
             }
         }
+
+        return resultado;
     }
 }
