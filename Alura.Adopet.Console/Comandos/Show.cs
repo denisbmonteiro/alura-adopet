@@ -15,8 +15,15 @@ internal class Show : IComando
 
     public Task<Result> ExecutarAsync(string[] args)
     {
-        ExibeConteudoArquivo();
-        return Task.FromResult(Result.Ok());
+        try
+        {
+            ExibeConteudoArquivo();
+            return Task.FromResult(Result.Ok());
+        }
+        catch (Exception ex)
+        {
+            return Task.FromResult(Result.Fail(new Error("Exibição do arquivo falhou!").CausedBy(ex)));
+        }
     }
 
     private void ExibeConteudoArquivo()

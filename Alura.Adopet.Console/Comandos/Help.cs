@@ -16,8 +16,15 @@ internal class Help : IComando
 
     public Task<Result> ExecutarAsync(string[] args)
     {
-        ExibeDocumentacao(args);
-        return Task.FromResult(Result.Ok());
+        try
+        {
+            ExibeDocumentacao(args);
+            return Task.FromResult(Result.Ok());
+        }
+        catch (Exception ex)
+        {
+            return Task.FromResult(Result.Fail(new Error("Exibição da documentação falhou!").CausedBy(ex)));
+        }
     }
 
     private void ExibeDocumentacao(string[] parametros)

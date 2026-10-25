@@ -20,21 +20,27 @@ internal class List : IComando
 
     private async Task<Result> ListaDadosPetsDaAPIAsync()
     {
-        System.Console.WriteLine("----- Lista de Pets importados no sistema -----");
-
-        var pets = await _httpClientPet.ListPetsAsync();
-
-        if (pets is null)
+        try
         {
-            System.Console.WriteLine("Nenhum pet encontrado!");
-            return Result.Fail("Nenhum pet encontrado!");
-        }
+            System.Console.WriteLine("----- Lista de Pets importados no sistema -----");
+            var pets = await _httpClientPet.ListPetsAsync();
 
-        foreach (var pet in pets)
+            if (pets is null)
+            {
+                System.Console.WriteLine("Nenhum pet encontrado!");
+                return Result.Fail("Nenhum pet encontrado!");
+            }
+
+            foreach (var pet in pets)
+            {
+                System.Console.WriteLine(pet);
+            }
+
+            return Result.Ok();
+        }
+        catch (Exception ex)
         {
-            System.Console.WriteLine(pet);
+            return Result.Fail(new Error("Listagem falhou!").CausedBy(ex));
         }
-
-        return Result.Ok();
     }
 }
