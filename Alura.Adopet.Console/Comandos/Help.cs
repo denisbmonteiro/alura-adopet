@@ -5,7 +5,7 @@ using FluentResults;
 namespace Alura.Adopet.Console.Comandos;
 
 [DocComando(instrucao: "help", documentacao: "adopet help comando que exibe informações da ajuda. \nadopet help <NOME_COMANDO> para acessar a ajuda de um comando específico.")]
-internal class Help : IComando
+public class Help : IComando
 {
     private readonly Dictionary<string, DocComandoAttribute> _docs;
     private readonly string? _comando;
@@ -49,6 +49,7 @@ internal class Help : IComando
             else
             {
                 resultado.Add("Comando não encontrado!");
+                throw new ArgumentException();
             }
         }
 
