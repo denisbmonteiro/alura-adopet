@@ -1,6 +1,7 @@
 using Alura.Adopet.Console.Comandos;
 using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Servicos;
+using Alura.Adopet.Console.Util;
 using Alura.Adopet.Tests.Builder;
 using Moq;
 
@@ -61,5 +62,8 @@ public class ImportTest
 
         //Assert
         Assert.True(resultado.IsSuccess);
+
+        var sucesso = (SuccessWithPets) resultado.Successes[0];
+        Assert.Equal("Lima Limão", sucesso.Data.First().Nome);
     }
 }

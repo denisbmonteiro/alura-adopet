@@ -46,6 +46,6 @@ public class Import : IComando
         }
 
         System.Console.WriteLine("Importação concluída!");
-        return Result.Ok();
+        return Result.Ok().WithSuccess(new SuccessWithPets(listaDePets));
     }
 }
