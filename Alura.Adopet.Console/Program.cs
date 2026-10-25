@@ -1,25 +1,18 @@
 ﻿using Alura.Adopet.Console.Comandos;
+using Alura.Adopet.Console.UI;
+using FluentResults;
 
 var comandos = new ComandosDoSistema(args[1]);
 
-Console.ForegroundColor = ConsoleColor.Green;
+string comando = args[0].Trim();
+IComando? cmd = comandos[comando];
 
-try
+if (cmd is not null)
 {
-    string comando = args[0].Trim();
-    IComando? cmd = comandos[comando];
-
-    if (cmd is not null)
-        await cmd.ExecutarAsync(args);
-    else
-        Console.WriteLine("Comando inválido!");
+    var resultado = await cmd.ExecutarAsync(args);
+    ConsoleUI.ExibeResultado(resultado);
 }
-catch (Exception ex)
+else
 {
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine($"Aconteceu uma exceção: {ex.Message}");
-}
-finally
-{
-    Console.ForegroundColor = ConsoleColor.White;
+    ConsoleUI.ExibeResultado(Result.Fail("Comando inválido!"));
 }
