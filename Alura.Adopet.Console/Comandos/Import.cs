@@ -28,18 +28,11 @@ public class Import : IComando
             var listaDePets = _leitorDeArquivo.RealizaLeitura();
 
             if (listaDePets is null)
-            {
-                System.Console.WriteLine("Nenhum pet encontrado no arquivo!");
                 return Result.Fail("Nenhum pet encontrado no arquivo!");
-            }
 
             foreach (var pet in listaDePets)
-            {
-                System.Console.WriteLine(pet);
                 await _httpClientPet.CreatePetAsync(pet);
-            }
 
-            System.Console.WriteLine("Importação concluída!");
             return Result.Ok().WithSuccess(new SuccessWithPets(listaDePets));
         }
         catch (Exception ex)
