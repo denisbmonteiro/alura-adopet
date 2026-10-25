@@ -10,6 +10,8 @@ public static class PetAPartirDoCsv
 
         if (string.IsNullOrEmpty(linha)) throw new ArgumentException("Texto não pode ser vazio");
 
+        if (propriedades.Length < 3) throw new ArgumentException("Texto com campos insuficientes!");
+
         bool guidValido = Guid.TryParse(propriedades[0], out Guid petId);
         if (!guidValido) throw new ArgumentException("Identificador do pet inválido!");
 
