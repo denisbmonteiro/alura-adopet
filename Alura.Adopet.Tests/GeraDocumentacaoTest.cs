@@ -10,7 +10,7 @@ public class GeraDocumentacaoTest
     public void QuandoExistemComandosDeveRetornarDicionarioNaoVazio()
     {
         //Arrange
-        var assemblyComOTipoDocComando = Assembly.GetAssembly(typeof(DocComando))!;
+        var assemblyComOTipoDocComando = Assembly.GetAssembly(typeof(DocComandoAttribute))!;
 
         //Act
         var dicionario = DocumentacaoDoSistema.ToDictionary(assemblyComOTipoDocComando);
