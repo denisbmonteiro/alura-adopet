@@ -41,4 +41,25 @@ public class ImportTest
         //Act+Assert
         await Assert.ThrowsAnyAsync<Exception>(() => import.ExecutarAsync(args));
     }
+
+    [Fact]
+    public async Task QuandoPetEstiverNoArquivoDeveSerImportado()
+    {
+        //Arrange
+        var listaDePet = new List<Pet>();
+        var pet = new Pet(new Guid("456b24f4-19e2-4423-845d-4a80e8854a41"), "Lima Limão", TipoPet.Gato);
+        listaDePet.Add(pet);
+
+        var leitorDeArquivo = LeitorDeArquivoMockBuilder.GetMock(listaDePet);
+        var httpClientPet = HttpClientPetMockBuilder.GetMock();
+
+        var import = new Import(httpClientPet.Object, leitorDeArquivo.Object);
+        string[] args = { "import", "lista.csv" };
+
+        //Act
+        var resultado = await import.ExecutarAsync(args);
+
+        //Assert
+        
+    }
 }
