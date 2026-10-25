@@ -1,4 +1,5 @@
 ﻿using Alura.Adopet.Console.Util;
+using FluentResults;
 
 namespace Alura.Adopet.Console.Comandos;
 
@@ -12,13 +13,13 @@ internal class Show : IComando
         _leitorDeArquivo = leitorDeArquivo;
     }
 
-    public Task ExecutarAsync(string[] args)
+    public Task<Result> ExecutarAsync(string[] args)
     {
-        ExibeConteudoArquivo(args[1]);
-        return Task.CompletedTask;
+        ExibeConteudoArquivo();
+        return Task.FromResult(Result.Ok());
     }
 
-    private void ExibeConteudoArquivo(string caminhoDoArquivoASerExibido)
+    private void ExibeConteudoArquivo()
     {
         var listaDePets = _leitorDeArquivo.RealizaLeitura();
 

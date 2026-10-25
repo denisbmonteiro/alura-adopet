@@ -1,4 +1,5 @@
 ﻿using Alura.Adopet.Console.Servicos;
+using FluentResults;
 
 namespace Alura.Adopet.Console.Comandos;
 
@@ -12,12 +13,12 @@ internal class List : IComando
         _httpClientPet = httpClientPet;
     }
 
-    public Task ExecutarAsync(string[] args)
+    public Task<Result> ExecutarAsync(string[] args)
     {
         return ListaDadosPetsDaAPIAsync();
     }
 
-    private async Task ListaDadosPetsDaAPIAsync()
+    private async Task<Result> ListaDadosPetsDaAPIAsync()
     {
         System.Console.WriteLine("----- Lista de Pets importados no sistema -----");
 
@@ -26,12 +27,14 @@ internal class List : IComando
         if (pets is null)
         {
             System.Console.WriteLine("Nenhum pet encontrado!");
-            return;
+            return Result.Fail("Nenhum pet encontrado!");
         }
 
         foreach (var pet in pets)
         {
             System.Console.WriteLine(pet);
         }
+
+        return Result.Ok();
     }
 }

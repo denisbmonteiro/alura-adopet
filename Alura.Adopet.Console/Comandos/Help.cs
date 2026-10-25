@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Alura.Adopet.Console.Util;
+using FluentResults;
 
 namespace Alura.Adopet.Console.Comandos;
 
@@ -13,10 +14,10 @@ internal class Help : IComando
         docs = DocumentacaoDoSistema.ToDictionary(Assembly.GetExecutingAssembly());
     }
 
-    public Task ExecutarAsync(string[] args)
+    public Task<Result> ExecutarAsync(string[] args)
     {
         ExibeDocumentacao(args);
-        return Task.CompletedTask;
+        return Task.FromResult(Result.Ok());
     }
 
     private void ExibeDocumentacao(string[] parametros)

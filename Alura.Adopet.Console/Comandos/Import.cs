@@ -1,5 +1,6 @@
 ﻿using Alura.Adopet.Console.Servicos;
 using Alura.Adopet.Console.Util;
+using FluentResults;
 
 namespace Alura.Adopet.Console.Comandos;
 
@@ -15,19 +16,19 @@ public class Import : IComando
         _leitorDeArquivo = leitorDeArquivo;
     }
 
-    public async Task ExecutarAsync(string[] args)
+    public async Task<Result> ExecutarAsync(string[] args)
     {
-        await ImportacaoArquivoPetAsync();
+        return await ImportacaoArquivoPetAsync();
     }
 
-    private async Task ImportacaoArquivoPetAsync()
+    private async Task<Result> ImportacaoArquivoPetAsync()
     {
         var listaDePets = _leitorDeArquivo.RealizaLeitura();
 
         if (listaDePets is null)
         {
             System.Console.WriteLine("Nenhum pet encontrado no arquivo!");
-            return;
+            return Result.Fail("Nenhum pet encontrado no arquivo!");
         }
 
         foreach (var pet in listaDePets)
@@ -45,5 +46,6 @@ public class Import : IComando
         }
 
         System.Console.WriteLine("Importação concluída!");
+        return Result.Ok();
     }
 }
