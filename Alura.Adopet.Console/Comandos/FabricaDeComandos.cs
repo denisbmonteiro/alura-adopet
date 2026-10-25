@@ -5,7 +5,7 @@ namespace Alura.Adopet.Console.Comandos;
 
 public static class FabricaDeComandos
 {
-    public static IComando? CriarComando(string[] argumentos)
+    public static IComando? CriarComando(string[]? argumentos)
     {
         if (argumentos is null || argumentos.Length == 0)
             return null;

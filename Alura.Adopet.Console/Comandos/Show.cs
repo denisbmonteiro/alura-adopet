@@ -1,4 +1,5 @@
-﻿using Alura.Adopet.Console.Util;
+﻿using Alura.Adopet.Console.Modelos;
+using Alura.Adopet.Console.Util;
 using FluentResults;
 
 namespace Alura.Adopet.Console.Comandos;
@@ -27,7 +28,7 @@ public class Show : IComando
 
     private Task<Result> ExibeConteudoArquivo()
     {
-        var listaDePets = _leitorDeArquivo.RealizaLeitura();
+        var listaDePets = _leitorDeArquivo.RealizaLeitura() ?? new List<Pet>();
         return Task.FromResult(Result.Ok().WithSuccess(new SuccessWithPets(listaDePets, "Exibição do arquivo realizada com sucesso!")));
     }
 }

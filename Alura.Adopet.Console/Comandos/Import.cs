@@ -1,4 +1,5 @@
-﻿using Alura.Adopet.Console.Servicos;
+﻿using Alura.Adopet.Console.Modelos;
+using Alura.Adopet.Console.Servicos;
 using Alura.Adopet.Console.Util;
 using FluentResults;
 
@@ -25,7 +26,7 @@ public class Import : IComando
     {
         try
         {
-            var listaDePets = _leitorDeArquivo.RealizaLeitura();
+            var listaDePets = _leitorDeArquivo.RealizaLeitura() ?? new List<Pet>();
 
             foreach (var pet in listaDePets)
                 await _httpClientPet.CreatePetAsync(pet);

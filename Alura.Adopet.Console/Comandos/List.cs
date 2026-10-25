@@ -1,4 +1,5 @@
-﻿using Alura.Adopet.Console.Servicos;
+﻿using Alura.Adopet.Console.Modelos;
+using Alura.Adopet.Console.Servicos;
 using Alura.Adopet.Console.Util;
 using FluentResults;
 
@@ -23,7 +24,7 @@ public class List : IComando
     {
         try
         {
-            var pets = await _httpClientPet.ListPetsAsync();
+            var pets = await _httpClientPet.ListPetsAsync() ?? Enumerable.Empty<Pet>();
             return Result.Ok().WithSuccess(new SuccessWithPets(pets, "Listagem de Pets realizada com sucesso!"));
         }
         catch (Exception ex)
