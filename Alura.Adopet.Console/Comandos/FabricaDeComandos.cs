@@ -7,6 +7,9 @@ public static class FabricaDeComandos
 {
     public static IComando? CriarComando(string[] argumentos)
     {
+        if (argumentos is null || argumentos.Length == 0)
+            return null;
+
         var comando = argumentos[0];
         switch (comando)
         {
