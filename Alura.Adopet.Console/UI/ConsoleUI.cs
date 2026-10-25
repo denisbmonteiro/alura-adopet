@@ -1,3 +1,4 @@
+using Alura.Adopet.Console.Util;
 using FluentResults;
 
 namespace Alura.Adopet.Console.UI;
@@ -14,11 +15,36 @@ public static class ConsoleUI
             {
                 ExibeFalha(result);
             }
+            else
+            {
+                ExibeSucesso(result);
+            }
         }
         finally
         {
             System.Console.ForegroundColor = ConsoleColor.White;
         }
+    }
+
+    private static void ExibeSucesso(Result result)
+    {
+        var sucesso = result.Successes.First();
+        switch (sucesso)
+        {
+            case SuccessWithPets s:
+                ExibirPets(s);
+                break;
+        }
+    }
+
+    private static void ExibirPets(SuccessWithPets sucesso)
+    {
+        foreach (var pet in sucesso.Data)
+        {
+            System.Console.WriteLine(pet);
+        }
+
+        System.Console.WriteLine(sucesso.Message);
     }
 
     private static void ExibeFalha(Result result)

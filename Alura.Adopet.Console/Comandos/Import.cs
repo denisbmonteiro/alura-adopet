@@ -33,7 +33,7 @@ public class Import : IComando
             foreach (var pet in listaDePets)
                 await _httpClientPet.CreatePetAsync(pet);
 
-            return Result.Ok().WithSuccess(new SuccessWithPets(listaDePets));
+            return Result.Ok().WithSuccess(new SuccessWithPets(listaDePets, "Importação realizada com sucesso!"));
         }
         catch (Exception ex)
         {

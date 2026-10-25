@@ -20,8 +20,6 @@ public class LeitorDeArquivo
 
         using (var sr = new StreamReader(_caminhoArquivo))
         {
-            System.Console.WriteLine("----- Dados a serem importados -----");
-
             while (!sr.EndOfStream)
             {
                 var linha = sr.ReadLine();
