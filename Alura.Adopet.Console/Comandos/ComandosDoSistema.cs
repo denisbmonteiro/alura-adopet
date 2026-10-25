@@ -9,10 +9,10 @@ public class ComandosDoSistema
     private readonly LeitorDeArquivo _leitorDeArquivo;
     private readonly Dictionary<string, IComando> _comandosDoSistema;
 
-    public ComandosDoSistema(string caminhoDoArquivo)
+    public ComandosDoSistema(string[] args)
     {
         _httpClientPet = new HttpClientPet(new AdopetApiClientFactory().CreateClient("adopet"));
-        _leitorDeArquivo = new LeitorDeArquivo(caminhoDoArquivo);
+        _leitorDeArquivo = new LeitorDeArquivo(args.Length == 2 ? args[1] : "");
         _comandosDoSistema = new()
         {
             {"help", new Help() },

@@ -2,7 +2,7 @@
 using Alura.Adopet.Console.UI;
 using FluentResults;
 
-var comandos = new ComandosDoSistema(args[1]);
+var comandos = new ComandosDoSistema(args);
 
 string comando = args[0].Trim();
 IComando? cmd = comandos[comando];

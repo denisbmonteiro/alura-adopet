@@ -17,8 +17,7 @@ internal class Show : IComando
     {
         try
         {
-            ExibeConteudoArquivo();
-            return Task.FromResult(Result.Ok());
+            return ExibeConteudoArquivo();
         }
         catch (Exception ex)
         {
@@ -26,19 +25,9 @@ internal class Show : IComando
         }
     }
 
-    private void ExibeConteudoArquivo()
+    private Task<Result> ExibeConteudoArquivo()
     {
         var listaDePets = _leitorDeArquivo.RealizaLeitura();
-
-        if (listaDePets is null)
-        {
-            System.Console.WriteLine("Nenhum pet encontrado no arquivo!");
-            return;
-        }
-
-        foreach (var pet in listaDePets)
-        {
-            System.Console.WriteLine(pet);
-        }
+        return Task.FromResult(Result.Ok().WithSuccess(new SuccessWithPets(listaDePets, "Exibição do arquivo realizada com sucesso!")));
     }
 }

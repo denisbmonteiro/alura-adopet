@@ -27,9 +27,6 @@ public class Import : IComando
         {
             var listaDePets = _leitorDeArquivo.RealizaLeitura();
 
-            if (listaDePets is null)
-                return Result.Fail("Nenhum pet encontrado no arquivo!");
-
             foreach (var pet in listaDePets)
                 await _httpClientPet.CreatePetAsync(pet);
 
