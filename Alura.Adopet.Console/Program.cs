@@ -2,14 +2,11 @@
 using Alura.Adopet.Console.UI;
 using FluentResults;
 
-var comandos = new ComandosDoSistema(args);
+IComando? comando = FabricaDeComandos.CriarComando(args);
 
-string comando = args[0].Trim();
-IComando? cmd = comandos[comando];
-
-if (cmd is not null)
+if (comando is not null)
 {
-    var resultado = await cmd.ExecutarAsync(args);
+    var resultado = await comando.ExecutarAsync();
     ConsoleUI.ExibeResultado(resultado);
 }
 else

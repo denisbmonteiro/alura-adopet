@@ -7,18 +7,20 @@ namespace Alura.Adopet.Console.Comandos;
 [DocComando(instrucao: "help", documentacao: "adopet help comando que exibe informações da ajuda. \nadopet help <NOME_COMANDO> para acessar a ajuda de um comando específico.")]
 internal class Help : IComando
 {
-    private Dictionary<string, DocComando> docs;
+    private readonly Dictionary<string, DocComando> _docs;
+    private readonly string? _comando;
 
-    public Help()
+    public Help(string? comando)
     {
-        docs = DocumentacaoDoSistema.ToDictionary(Assembly.GetExecutingAssembly());
+        _docs = DocumentacaoDoSistema.ToDictionary(Assembly.GetExecutingAssembly());
+        _comando = comando;
     }
 
-    public Task<Result> ExecutarAsync(string[] args)
+    public Task<Result> ExecutarAsync()
     {
         try
         {
-            return Task.FromResult(Result.Ok().WithSuccess(new SuccessWithDocs(GerarDocumentacao(args))));
+            return Task.FromResult(Result.Ok().WithSuccess(new SuccessWithDocs(GerarDocumentacao())));
         }
         catch (Exception ex)
         {
@@ -26,23 +28,22 @@ internal class Help : IComando
         }
     }
 
-    private IEnumerable<string> GerarDocumentacao(string[] parametros)
+    private IEnumerable<string> GerarDocumentacao()
     {
         var resultado = new List<string>();
 
-        if (parametros.Length == 1)
+        if (_comando is null)
         {
-            foreach (var doc in docs.Values)
+            foreach (var doc in _docs.Values)
             {
                 resultado.Add(doc.Documentacao);
             }
         }
-        else if (parametros.Length == 2)
+        else
         {
-            string comandoASerExibido = parametros[1];
-            if (docs.ContainsKey(comandoASerExibido))
+            if (_docs.ContainsKey(_comando))
             {
-                var comando = docs[comandoASerExibido];
+                var comando = _docs[_comando];
                 resultado.Add(comando.Documentacao);
             }
             else

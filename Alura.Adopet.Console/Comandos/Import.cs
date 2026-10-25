@@ -16,7 +16,7 @@ public class Import : IComando
         _leitorDeArquivo = leitorDeArquivo;
     }
 
-    public async Task<Result> ExecutarAsync(string[] args)
+    public async Task<Result> ExecutarAsync()
     {
         return await ImportacaoArquivoPetAsync();
     }

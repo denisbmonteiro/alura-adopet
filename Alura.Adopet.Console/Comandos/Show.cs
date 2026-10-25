@@ -13,7 +13,7 @@ internal class Show : IComando
         _leitorDeArquivo = leitorDeArquivo;
     }
 
-    public Task<Result> ExecutarAsync(string[] args)
+    public Task<Result> ExecutarAsync()
     {
         try
         {

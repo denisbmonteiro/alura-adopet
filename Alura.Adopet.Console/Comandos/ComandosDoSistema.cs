@@ -15,7 +15,7 @@ public class ComandosDoSistema
         _leitorDeArquivo = new LeitorDeArquivo(args.Length == 2 ? args[1] : "");
         _comandosDoSistema = new()
         {
-            {"help", new Help() },
+            {"help", new Help(args[1]) },
             {"import", new Import(_httpClientPet, _leitorDeArquivo) },
             {"list", new List(_httpClientPet) },
             {"show", new Show(_leitorDeArquivo) }
