@@ -32,10 +32,10 @@ We also explore fundamental concepts such as:
 
 ## Solution overview
 
-The project has two main parts:
+The solution targets **.NET 10** and has two main parts:
 
-1. An ASP.NET Core API for registering and listing pets
-2. A console client for importing pet data from files
+1. An ASP.NET Core API for registering and listing pets and clients
+2. A console client for importing and querying pet data from files
 
 This architecture makes it possible to practice building services as well as consuming APIs and creating batch import workflows.
 
@@ -43,10 +43,14 @@ This architecture makes it possible to practice building services as well as con
 
 ### Web API
 
-The API provides endpoints for managing pets:
+The API provides endpoints for managing pets and clients:
 
 - `GET /pet/list` — lists registered pets
 - `POST /pet/add` — registers a new pet
+- `GET /cliente/list` — lists registered clients
+- `POST /cliente/add` — registers a new client
+
+On startup, the API populates the database with sample data.
 
 The application uses:
 
@@ -59,19 +63,21 @@ The application uses:
 
 The console project lets you interact with the API through commands:
 
-- `import` — imports pets from a file
+- `import <file>` — imports pets from a file into the API
 - `list` — displays the pets registered in the API
-- `show` — shows the contents of an input file
-- `help` — displays help for the available commands
+- `show <file>` — shows the contents of an input file
+- `help [command]` — displays help for all commands, or for a specific one
+
+The `import` and `show` commands accept `.csv` and `.json` files. Sample files are included in the project (`lista.csv`, `pets.json`, `clientes.csv` and `clientes.json`).
 
 ## How to run
 
 ### 1. Run the API
 
-From the `Alura.Adopet.API` project directory, run:
+From the solution root, run:
 
 ```bash
-dotnet run
+dotnet run --project src/Alura.Adopet.API
 ```
 
 The API will be available at:
@@ -83,10 +89,13 @@ While the application is running, Swagger is available at the root URL.
 
 ### 2. Run the console client
 
-With the API running, use the following commands from the `Alura.Adopet.Console` project directory:
+With the API running, use the following commands from the `src/Alura.Adopet.Console` directory:
 
 ```bash
 dotnet run import lista.csv
+```
+```bash
+dotnet run import pets.json
 ```
 ```bash
 dotnet run list
@@ -97,20 +106,48 @@ dotnet run show lista.csv
 ```bash
 dotnet run help
 ```
+```bash
+dotnet run help import
+```
 
 ### 3. Run the tests
 
-From the solution root, run:
+From the solution root, run the unit tests:
 
 ```bash
-dotnet test
+dotnet test tests/Alura.Adopet.Testes
+```
+
+The integration tests call the real API, so start it first (step 1) and then run:
+
+```bash
+dotnet test tests/Alura.Adopet.TestesIntegracao
 ```
 
 ## Project structure
 
-- `Alura.Adopet.API` — web application with controllers, domain, repositories, services, and logging configuration
-- `Alura.Adopet.Console` — command-line application for importing and querying data
-- `Alura.Adopet.Tests` — automated tests for the console client, written with xUnit and Moq
+```
+├── src
+│   ├── Alura.Adopet.API              # Web API
+│   │   ├── Controladores             # Pet and client endpoints
+│   │   ├── Dados/Context             # EF Core DbContext (in-memory database)
+│   │   ├── Dominio                   # Domain entities (Pet, Cliente, TipoPet)
+│   │   └── Service                   # Sample data generation
+│   └── Alura.Adopet.Console          # Command-line client
+│       ├── Atributos                 # Attribute used to document commands
+│       ├── Comandos                  # Commands (import, list, show, help) and ComandosFactory
+│       ├── Modelos                   # Console models (Pet, Cliente, TipoPet)
+│       ├── Results                   # FluentResults success types
+│       ├── Servicos
+│       │   ├── Abstracoes            # Interfaces (IApiService, ILeitorDeArquivos)
+│       │   ├── Arquivos              # CSV and JSON file readers and their factory
+│       │   └── Http                  # HTTP client for the API
+│       ├── UI                        # Console output
+│       └── Util                      # Help documentation generation
+└── tests
+    ├── Alura.Adopet.Testes           # Unit tests (xUnit and Moq)
+    └── Alura.Adopet.TestesIntegracao # Integration tests against the running API
+```
 
 ## Important notes
 
