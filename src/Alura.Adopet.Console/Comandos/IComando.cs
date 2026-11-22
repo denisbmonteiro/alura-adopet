@@ -1,9 +1,8 @@
 ﻿using FluentResults;
 
-namespace Alura.Adopet.Console.Comandos
+namespace Alura.Adopet.Console.Comandos;
+
+public interface IComando
 {
-    public interface IComando
-    {
-        Task<Result> ExecutarAsync();
-    }
+    Task<Result> ExecutarAsync();
 }
