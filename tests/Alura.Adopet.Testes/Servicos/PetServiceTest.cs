@@ -6,7 +6,7 @@ using System.Net.Sockets;
 
 namespace Alura.Adopet.Testes.Servicos;
 
-public class HttpClientPetTest
+public class PetServiceTest
 {
     [Fact]
     public async Task ListaPetsDeveRetornarUmaListaNaoVazia()
@@ -99,5 +99,4 @@ public class HttpClientPetTest
         await Assert.ThrowsAnyAsync<Exception>(() => clientePet.ListAsync());
 
     }
-
 }
