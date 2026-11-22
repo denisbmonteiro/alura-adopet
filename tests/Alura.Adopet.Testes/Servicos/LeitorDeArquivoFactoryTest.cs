@@ -1,6 +1,7 @@
 ﻿using Alura.Adopet.Console.Servicos.Arquivos;
 
 namespace Alura.Adopet.Testes.Servicos;
+
 public class LeitorDeArquivoFactoryTest
 {
     [Fact]
@@ -41,5 +42,4 @@ public class LeitorDeArquivoFactoryTest
         // assert
         Assert.Null(leitor);
     }
-
 }

@@ -4,7 +4,7 @@ using Alura.Adopet.Console.Servicos.Abstracoes;
 
 namespace Alura.Adopet.Console.Servicos.Http;
 
-public class HttpClientPet: IApiService
+public class HttpClientPet: IApiService<Pet>
 {
     private HttpClient client;
 
