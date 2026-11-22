@@ -38,7 +38,7 @@ public class LeitorDeArquivoJsonTest : IDisposable
     [Fact]
     public void QuandoArquivoExistenteDeveRetornarUmaListaDePets()
     {
-        //Arrange            
+        //Arrange
         //Act
         var listaDePets = new LeitorDeArquivosJson(caminhoArquivo).RealizaLeitura()!;
         //Assert

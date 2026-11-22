@@ -14,11 +14,11 @@ public class LeitorDeArquivoCsv: ILeitorDeArquivos
     public virtual IEnumerable<Pet> RealizaLeitura()
     {
         if (string.IsNullOrEmpty(caminhoDoArquivoASerLido))
-        {
             return null;
-        }
-        List<Pet> lista = new List<Pet>();
+
+        var lista = new List<Pet>();
         using StreamReader sr = new StreamReader(caminhoDoArquivoASerLido);
+
         while (!sr.EndOfStream)
         {
             string? linha = sr.ReadLine();
@@ -36,6 +36,7 @@ public class LeitorDeArquivoCsv: ILeitorDeArquivos
                 lista.Add(new Pet(petId, propriedades[1], tipo));
             }
         }
+
         return lista;
     }
 }
