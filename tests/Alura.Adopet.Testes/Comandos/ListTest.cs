@@ -15,7 +15,7 @@ public class ListTest
                           "Lima", TipoPet.Cachorro);
         listaDePet.Add(pet);
 
-        var httpClientPet = HttpClientPetMockBuilder.GetMockList(listaDePet);
+        var httpClientPet = ApiServiceMockBuilder.GetMockList(listaDePet);
 
         //Act
         var retorno = await new Console.Comandos.List(httpClientPet.Object)
@@ -25,6 +25,4 @@ public class ListTest
         var resultado = (SuccessWithPets)retorno.Successes[0];
         Assert.Single(resultado.Data);
     }
-
-
 }

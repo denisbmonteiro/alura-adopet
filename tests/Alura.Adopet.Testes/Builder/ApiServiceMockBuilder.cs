@@ -4,7 +4,7 @@ using Moq;
 
 namespace Alura.Adopet.Testes.Builder;
 
-internal static class HttpClientPetMockBuilder
+internal static class ApiServiceMockBuilder
 {
     public static Mock<PetService> GetMock()
     {
