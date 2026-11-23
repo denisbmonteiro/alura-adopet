@@ -1,3 +1,4 @@
+using Alura.Adopet.Console.Atributos;
 using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Results;
 using Alura.Adopet.Console.Servicos.Abstracoes;
@@ -5,6 +6,8 @@ using FluentResults;
 
 namespace Alura.Adopet.Console.Comandos;
 
+[DocComandoAttribute(instrucao: "import-clientes",
+    documentacao: "adopet import-clientes <ARQUIVO> comando que realiza a importação do arquivo de clientes.")]
 public class ImportClientes : IComando
 {
     private IApiService<Cliente> apiService;

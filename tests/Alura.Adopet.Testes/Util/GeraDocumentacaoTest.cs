@@ -16,10 +16,9 @@ public class GeraDocumentacaoTest
         Dictionary<string, DocComandoAttribute> dicionario =
               DocumentacaoDoSistema.ToDictionary(assemblyComOTipoDocComando);
 
-        //Assert            
+        //Assert
         Assert.NotNull(dicionario);
         Assert.NotEmpty(dicionario);
-        Assert.Equal(4, dicionario.Count);
-
+        Assert.Equal(5, dicionario.Count);
     }
 }
