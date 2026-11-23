@@ -6,6 +6,7 @@ namespace Alura.Adopet.Testes.Servicos;
 public class LeitorDeArquivoCsvTest : IDisposable
 {
     private string caminhoArquivo;
+
     public LeitorDeArquivoCsvTest()
     {
         //Setup
@@ -20,9 +21,10 @@ public class LeitorDeArquivoCsvTest : IDisposable
     [Fact]
     public void QuandoArquivoExistenteDeveRetornarUmaListaDePets()
     {
-        //Arrange            
+        //Arrange
         //Act
-        var listaDePets = new LeitorDeArquivoCsv(caminhoArquivo).RealizaLeitura()!;
+        var listaDePets = new PetsDoCsv(caminhoArquivo).RealizaLeitura()!;
+
         //Assert
         Assert.NotNull(listaDePets);
         Assert.Single(listaDePets);
@@ -32,9 +34,10 @@ public class LeitorDeArquivoCsvTest : IDisposable
     [Fact]
     public void QuandoArquivoNaoExistenteDeveRetornarNulo()
     {
-        //Arrange            
+        //Arrange
         //Act
-        var listaDePets = new LeitorDeArquivoCsv("").RealizaLeitura();
+        var listaDePets = new PetsDoCsv("").RealizaLeitura();
+
         //Assert
         Assert.Null(listaDePets);
     }
@@ -42,9 +45,10 @@ public class LeitorDeArquivoCsvTest : IDisposable
     [Fact]
     public void QuandoArquivoForNuloDeveRetornarNulo()
     {
-        //Arrange            
+        //Arrange
         //Act
-        var listaDePets = new LeitorDeArquivoCsv(null).RealizaLeitura();
+        var listaDePets = new PetsDoCsv(null).RealizaLeitura();
+
         //Assert
         Assert.Null(listaDePets);
     }

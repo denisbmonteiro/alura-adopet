@@ -1,10 +1,9 @@
-﻿using Alura.Adopet.Console.Modelos;
-using Alura.Adopet.Console.Servicos.Abstracoes;
+﻿using Alura.Adopet.Console.Servicos.Abstracoes;
 using System.Text.Json;
 
 namespace Alura.Adopet.Console.Servicos.Arquivos;
 
-public class LeitorDeArquivosJson: ILeitorDeArquivos<Pet>
+public class LeitorDeArquivosJson<Pet> : ILeitorDeArquivos<Pet>
 {
     private string caminhoArquivo;
 
