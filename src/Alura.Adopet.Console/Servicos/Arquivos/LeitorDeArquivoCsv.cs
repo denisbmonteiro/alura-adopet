@@ -3,7 +3,7 @@ using Alura.Adopet.Console.Servicos.Abstracoes;
 
 namespace Alura.Adopet.Console.Servicos.Arquivos;
 
-public class LeitorDeArquivoCsv: ILeitorDeArquivos
+public class LeitorDeArquivoCsv: ILeitorDeArquivos<Pet>
 {
     private string caminhoDoArquivoASerLido;
 
