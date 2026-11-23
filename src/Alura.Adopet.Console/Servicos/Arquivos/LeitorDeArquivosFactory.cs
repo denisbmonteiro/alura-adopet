@@ -11,9 +11,23 @@ public static class LeitorDeArquivosFactory
         switch (extensao)
         {
             case ".csv":
-                return new LeitorDeArquivoCsv(caminhoArquivo);
+                return new PetsDoCsv(caminhoArquivo);
             case ".json":
-                return new LeitorDeArquivosJson(caminhoArquivo);
+                return new LeitorDeArquivosJson<Pet>(caminhoArquivo);
+            default:
+                return null;
+        }
+    }
+
+    public static ILeitorDeArquivos<Cliente>? CreateClienteFrom(string caminhoArquivo)
+    {
+        var extensao = Path.GetExtension(caminhoArquivo);
+        switch (extensao)
+        {
+            case ".csv":
+                return new ClientesDoCsv(caminhoArquivo);
+            case ".json":
+                return new LeitorDeArquivosJson<Cliente>(caminhoArquivo);
             default:
                 return null;
         }
